@@ -4,12 +4,25 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         led.stopAnimation()
         if (control.eventValue() == 1) {
             basic.showString("A")
+            MotorSpeed_L = 255
+            MotorSpeed_R = 255
         } else if (control.eventValue() == 3) {
             basic.showString("B")
+            if (MotorSpeed_L != 0 || MotorSpeed_R != 0) {
+                MotorSpeed_L = 0
+                MotorSpeed_R = 0
+            } else {
+                MotorSpeed_L = -255
+                MotorSpeed_R = -255
+            }
         } else if (control.eventValue() == 5) {
             basic.showString("C")
+            MotorSpeed_L = -255
+            MotorSpeed_R = 255
         } else if (control.eventValue() == 7) {
             basic.showString("D")
+            MotorSpeed_L = 255
+            MotorSpeed_R = -255
         } else if (control.eventValue() == 9) {
             basic.showString("1")
         } else if (control.eventValue() == 11) {
@@ -21,9 +34,16 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         } else {
             basic.clearScreen()
         }
+        SuperBit.MotorRunDual(
+        SuperBit.enMotors.M1,
+        MotorSpeed_L,
+        SuperBit.enMotors.M3,
+        MotorSpeed_R
+        )
     }
 })
+let MotorSpeed_R = 0
+let MotorSpeed_L = 0
 let lastValue = 0
 lastValue = 0
 bluetooth.startLEDService()
-basic.showString("GAMEPAD DEMO")
