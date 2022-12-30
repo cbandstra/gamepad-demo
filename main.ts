@@ -1,7 +1,6 @@
 control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EVT_ANY, function () {
     if (lastValue != control.eventValue()) {
         lastValue = control.eventValue()
-        led.stopAnimation()
         if (control.eventValue() == 1) {
             basic.showString("A")
             MotorSpeed_L = 255
@@ -37,7 +36,7 @@ control.onEvent(EventBusSource.MES_DPAD_CONTROLLER_ID, EventBusValue.MICROBIT_EV
         SuperBit.MotorRunDual(
         SuperBit.enMotors.M1,
         MotorSpeed_L,
-        SuperBit.enMotors.M3,
+        SuperBit.enMotors.M1,
         MotorSpeed_R
         )
     }
@@ -46,4 +45,7 @@ let MotorSpeed_R = 0
 let MotorSpeed_L = 0
 let lastValue = 0
 lastValue = 0
+let ServoDegree_1 = 0
+MotorSpeed_L = 0
+MotorSpeed_R = 0
 bluetooth.startLEDService()
